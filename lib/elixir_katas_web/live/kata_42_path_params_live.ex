@@ -34,7 +34,7 @@ defmodule ElixirKatasWeb.Kata42PathParamsLive do
     
       <div class="p-6 max-w-2xl mx-auto">
         <div class="mb-6 text-sm text-gray-500">
-           Click an item below. Notice the URL changes to <code>/katas/42-path-params/:id</code>
+           Click an item below. Notice the URL changes to <code>/liveview-katas/42-path-params/:id</code>
         </div>
 
         <div class="grid grid-cols-2 gap-6">
@@ -44,7 +44,7 @@ defmodule ElixirKatasWeb.Kata42PathParamsLive do
             <div class="space-y-2">
               <%= for item <- @items do %>
                 <.link
-                  patch={~p"/katas/42-path-params/#{item.id}"}
+                  patch={~p"/liveview-katas/42-path-params/#{item.id}"}
                   class={"block p-3 rounded transition-colors " <> 
                          if(@selected_item && @selected_item.id == item.id, 
                             do: "bg-indigo-50 border-2 border-indigo-500", 
@@ -77,7 +77,7 @@ defmodule ElixirKatasWeb.Kata42PathParamsLive do
                 <div class="pt-3 border-t">
                   <label class="text-xs text-gray-500">Current URL</label>
                   <div class="font-mono text-xs text-indigo-600">
-                    /katas/42-path-params/<%= @selected_item.id %>
+                    /liveview-katas/42-path-params/<%= @selected_item.id %>
                   </div>
                 </div>
               </div>

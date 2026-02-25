@@ -114,7 +114,7 @@ defmodule ElixirKatasWeb.Kata48RedirectsLive do
     {:noreply, 
      socket
      |> update(:patch_count, &(&1 + 1))
-     |> push_patch(to: ~p"/katas/48-redirects?page=#{new_page}")}
+     |> push_patch(to: ~p"/liveview-katas/48-redirects?page=#{new_page}")}
   end
 
   def handle_event("patch_next", _params, socket) do
@@ -122,7 +122,7 @@ defmodule ElixirKatasWeb.Kata48RedirectsLive do
     {:noreply, 
      socket
      |> update(:patch_count, &(&1 + 1))
-     |> push_patch(to: ~p"/katas/48-redirects?page=#{new_page}")}
+     |> push_patch(to: ~p"/liveview-katas/48-redirects?page=#{new_page}")}
   end
 
   def handle_event("navigate_home", _params, socket) do
@@ -136,7 +136,7 @@ defmodule ElixirKatasWeb.Kata48RedirectsLive do
     {:noreply, 
      socket
      |> update(:navigate_count, &(&1 + 1))
-     |> push_navigate(to: ~p"/katas/01-hello-world")}
+     |> push_navigate(to: ~p"/liveview-katas/01-hello-world")}
   end
 
   def handle_event("set_tab", %{"tab" => tab}, socket) do

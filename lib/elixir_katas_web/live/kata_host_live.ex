@@ -48,7 +48,7 @@ defmodule ElixirKatasWeb.KataHostLive do
       end
 
     if base_file == nil do
-      {:ok, socket |> put_flash(:error, "Kata #{kata_id} not found.") |> push_navigate(to: ~p"/katas")}
+      {:ok, socket |> put_flash(:error, "Kata #{kata_id} not found.") |> push_navigate(to: ~p"/liveview-katas")}
     else
       file_source = File.read!(base_file)
 

@@ -120,6 +120,7 @@ defmodule ElixirKatasWeb.KataComponents do
   attr :title, :string, required: true
   attr :description, :string, required: true
   attr :path, :string, required: true
+  attr :tags, :list, default: []
 
   def kata_card(assigns) do
     ~H"""
@@ -131,6 +132,15 @@ defmodule ElixirKatasWeb.KataComponents do
       <p class="text-gray-600 dark:text-gray-400">
         {@description}
       </p>
+      <%= if @tags != [] do %>
+        <div class="mt-3 flex flex-wrap gap-1">
+          <%= for tag <- @tags do %>
+            <span class={["inline-block px-2 py-0.5 text-xs font-medium rounded-full", ElixirKatasWeb.LiveviewKataData.tag_color(tag)]}>
+              {tag}
+            </span>
+          <% end %>
+        </div>
+      <% end %>
     </.link>
     """
   end

@@ -87,7 +87,7 @@ defmodule ElixirKatasWeb.Kata46SearchUrlLive do
   end
 
   def handle_event("search", %{"q" => query}, socket) do
-    {:noreply, push_patch(socket, to: ~p"/katas/46-search-url?q=#{URI.encode(query)}")}
+    {:noreply, push_patch(socket, to: ~p"/liveview-katas/46-search-url?q=#{URI.encode(query)}")}
   end
 
   def handle_event("set_tab", %{"tab" => tab}, socket) do

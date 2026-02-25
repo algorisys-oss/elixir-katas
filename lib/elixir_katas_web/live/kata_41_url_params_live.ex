@@ -107,7 +107,7 @@ defmodule ElixirKatasWeb.Kata41UrlParamsLive do
   def handle_event("set_filter", %{"filter" => filter}, socket) do
     # Use push_patch to update URL without remounting
     # This will trigger handle_params/3
-    {:noreply, push_patch(socket, to: ~p"/katas/41-url-params?filter=#{filter}")}
+    {:noreply, push_patch(socket, to: ~p"/liveview-katas/41-url-params?filter=#{filter}")}
   end
 
   def handle_event("set_tab", %{"tab" => tab}, socket) do

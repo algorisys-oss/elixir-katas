@@ -28,25 +28,25 @@ defmodule ElixirKatasWeb.Kata43NavbarLive do
           <nav class="bg-gray-50 border-b border-gray-200 px-6 py-3">
             <div class="flex space-x-6">
               <.link
-                patch={~p"/katas/43-navbar?page=home"}
+                patch={~p"/liveview-katas/43-navbar?page=home"}
                 class={nav_link_class(@current_page, "home")}
               >
                 Home
               </.link>
               <.link
-                patch={~p"/katas/43-navbar?page=products"}
+                patch={~p"/liveview-katas/43-navbar?page=products"}
                 class={nav_link_class(@current_page, "products")}
               >
                 Products
               </.link>
               <.link
-                patch={~p"/katas/43-navbar?page=about"}
+                patch={~p"/liveview-katas/43-navbar?page=about"}
                 class={nav_link_class(@current_page, "about")}
               >
                 About
               </.link>
               <.link
-                patch={~p"/katas/43-navbar?page=contact"}
+                patch={~p"/liveview-katas/43-navbar?page=contact"}
                 class={nav_link_class(@current_page, "contact")}
               >
                 Contact

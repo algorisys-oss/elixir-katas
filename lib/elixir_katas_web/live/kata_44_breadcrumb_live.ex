@@ -14,16 +14,16 @@ defmodule ElixirKatasWeb.Kata44BreadcrumbLive do
   end
 
   defp build_breadcrumbs(params) do
-    base = [{"Home", ~p"/katas/44-breadcrumb"}]
+    base = [{"Home", ~p"/liveview-katas/44-breadcrumb"}]
     
     case params do
       %{"section" => section, "page" => page} ->
         base ++ [
-          {String.capitalize(section), ~p"/katas/44-breadcrumb?section=#{section}"},
-          {String.capitalize(page), ~p"/katas/44-breadcrumb?section=#{section}&page=#{page}"}
+          {String.capitalize(section), ~p"/liveview-katas/44-breadcrumb?section=#{section}"},
+          {String.capitalize(page), ~p"/liveview-katas/44-breadcrumb?section=#{section}&page=#{page}"}
         ]
       %{"section" => section} ->
-        base ++ [{String.capitalize(section), ~p"/katas/44-breadcrumb?section=#{section}"}]
+        base ++ [{String.capitalize(section), ~p"/liveview-katas/44-breadcrumb?section=#{section}"}]
       _ ->
         base
     end
@@ -72,39 +72,39 @@ defmodule ElixirKatasWeb.Kata44BreadcrumbLive do
             <div class="grid grid-cols-3 gap-4">
               <div class="space-y-2">
                 <h3 class="font-medium text-sm text-gray-700">Documentation</h3>
-                <.link patch={~p"/katas/44-breadcrumb?section=docs"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=docs"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Docs Section
                 </.link>
-                <.link patch={~p"/katas/44-breadcrumb?section=docs&page=guides"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=docs&page=guides"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Guides
                 </.link>
-                <.link patch={~p"/katas/44-breadcrumb?section=docs&page=api"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=docs&page=api"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   API Reference
                 </.link>
               </div>
               
               <div class="space-y-2">
                 <h3 class="font-medium text-sm text-gray-700">Community</h3>
-                <.link patch={~p"/katas/44-breadcrumb?section=community"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=community"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Community Section
                 </.link>
-                <.link patch={~p"/katas/44-breadcrumb?section=community&page=forum"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=community&page=forum"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Forum
                 </.link>
-                <.link patch={~p"/katas/44-breadcrumb?section=community&page=chat"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=community&page=chat"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Chat
                 </.link>
               </div>
               
               <div class="space-y-2">
                 <h3 class="font-medium text-sm text-gray-700">Resources</h3>
-                <.link patch={~p"/katas/44-breadcrumb?section=resources"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=resources"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Resources Section
                 </.link>
-                <.link patch={~p"/katas/44-breadcrumb?section=resources&page=tutorials"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=resources&page=tutorials"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Tutorials
                 </.link>
-                <.link patch={~p"/katas/44-breadcrumb?section=resources&page=videos"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
+                <.link patch={~p"/liveview-katas/44-breadcrumb?section=resources&page=videos"} class="block p-3 bg-gray-50 hover:bg-gray-100 rounded text-sm">
                   Videos
                 </.link>
               </div>

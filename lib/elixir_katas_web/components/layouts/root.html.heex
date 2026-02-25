@@ -36,8 +36,16 @@
       })();
     </script>
   </head>
-  <body>
-    <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+  <body class="h-screen flex flex-col overflow-hidden">
+    <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 shrink-0">
+      <li>
+        <a href="/" class="flex items-center gap-1 font-semibold text-base">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </li>
+      <li class="flex-1"></li>
       <%= if @current_scope do %>
         <li>
           {@current_scope.user.email}
@@ -57,6 +65,8 @@
         </li>
       <% end %>
     </ul>
-    {@inner_content}
+    <div class="flex-1 min-h-0">
+      {@inner_content}
+    </div>
   </body>
 </html>

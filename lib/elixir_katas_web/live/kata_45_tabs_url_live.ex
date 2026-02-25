@@ -95,7 +95,7 @@ defmodule ElixirKatasWeb.Kata45TabsUrlLive do
   end
 
   def handle_event("switch_tab", %{"tab" => tab}, socket) do
-    {:noreply, push_patch(socket, to: ~p"/katas/45-tabs-url?tab=#{tab}")}
+    {:noreply, push_patch(socket, to: ~p"/liveview-katas/45-tabs-url?tab=#{tab}")}
   end
 
   def handle_event("set_tab", %{"tab" => tab}, socket) do
