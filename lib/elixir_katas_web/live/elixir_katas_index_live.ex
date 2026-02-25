@@ -54,7 +54,8 @@ defmodule ElixirKatasWeb.ElixirKatasIndexLive do
             matches_search =
               search == "" or
                 String.contains?(String.downcase(kata.label), search) or
-                String.contains?(String.downcase(kata.description), search)
+                String.contains?(String.downcase(kata.description), search) or
+                Enum.any?(kata.tags, &String.contains?(&1, search))
 
             matches_tags =
               MapSet.size(active_tags) == 0 or
