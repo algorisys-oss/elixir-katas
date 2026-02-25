@@ -28,6 +28,9 @@ defmodule ElixirKatasWeb.ElixirKataData do
 
   def sections do
     [
+      %{title: "Section 0: Foundations", katas: [
+        %{num: "00", slug: "00-the-beginning", label: "00 - The Beginning", color: "bg-violet-500", tags: ["processes", "otp"], description: "CPU cores, concurrency vs parallelism, threads vs processes, Actor model, OTP overview, let it crash"}
+      ]},
       %{title: "Section 1: Types, Operators & Basics", katas: [
         %{num: "01", slug: "01-type-explorer", label: "01 - Type Explorer", color: "bg-emerald-400", tags: ["types"], description: "Basic types: integer, float, string, atom, boolean, nil"},
         %{num: "02", slug: "02-arithmetic-lab", label: "02 - Arithmetic Lab", color: "bg-teal-400", tags: ["types"], description: "Operators: +, -, *, /, div, rem; float vs integer division"},
