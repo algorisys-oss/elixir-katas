@@ -121,27 +121,35 @@ defmodule ElixirKatasWeb.KataComponents do
   attr :description, :string, required: true
   attr :path, :string, required: true
   attr :tags, :list, default: []
+  attr :tag_color_fn, :any, default: &ElixirKatasWeb.LiveviewKataData.tag_color/1
 
   def kata_card(assigns) do
     ~H"""
-    <.link navigate={@path} class="card bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700 p-6 rounded-lg group">
-      <div class="flex items-center mb-4">
-        <span class="w-3 h-3 rounded-full bg-indigo-600 mr-3"></span>
-        <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">{@title}</h2>
-      </div>
-      <p class="text-gray-600 dark:text-gray-400">
-        {@description}
-      </p>
-      <%= if @tags != [] do %>
-        <div class="mt-3 flex flex-wrap gap-1">
-          <%= for tag <- @tags do %>
-            <span class={["inline-block px-2 py-0.5 text-xs font-medium rounded-full", ElixirKatasWeb.LiveviewKataData.tag_color(tag)]}>
-              {tag}
-            </span>
-          <% end %>
+    <div class="card bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700 p-6 rounded-lg group relative">
+      <.link navigate={@path} class="absolute inset-0 z-0"><span class="sr-only">{@title}</span></.link>
+      <div class="relative z-10 pointer-events-none">
+        <div class="flex items-center mb-4">
+          <span class="w-3 h-3 rounded-full bg-indigo-600 mr-3"></span>
+          <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">{@title}</h2>
         </div>
-      <% end %>
-    </.link>
+        <p class="text-gray-600 dark:text-gray-400">
+          {@description}
+        </p>
+        <%= if @tags != [] do %>
+          <div class="mt-3 flex flex-wrap gap-1 pointer-events-auto">
+            <%= for tag <- @tags do %>
+              <button
+                phx-click="toggle_tag"
+                phx-value-tag={tag}
+                class={["inline-block px-2 py-0.5 text-xs font-medium rounded-full cursor-pointer hover:ring-2 hover:ring-offset-1 hover:ring-current transition-all", @tag_color_fn.(tag)]}
+              >
+                {tag}
+              </button>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
     """
   end
   defp slugify(str) do

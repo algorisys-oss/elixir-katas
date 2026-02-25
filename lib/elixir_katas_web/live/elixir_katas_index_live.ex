@@ -144,6 +144,7 @@ defmodule ElixirKatasWeb.ElixirKatasIndexLive do
                 description={kata.description}
                 path={"/elixir-katas/#{kata.slug}"}
                 tags={kata.tags}
+                tag_color_fn={&ElixirKataData.tag_color/1}
               />
             <% end %>
           </div>
