@@ -48,6 +48,7 @@
         <span class="font-semibold text-white">{assigns[:kata_section]} Katas</span>
       <% end %>
       <span class="flex-1"></span>
+      <.theme_toggle />
       <%= if @current_scope do %>
         <span class="text-gray-400">{@current_scope.user.email}</span>
         <.link href={~p"/users/settings"} class="hover:text-white transition-colors">Settings</.link>
