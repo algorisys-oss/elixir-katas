@@ -37,35 +37,27 @@
     </script>
   </head>
   <body class="h-screen flex flex-col overflow-hidden">
-    <ul class="menu menu-horizontal w-full relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 shrink-0">
-      <li>
-        <a href="/" class="flex items-center gap-1 font-semibold text-base">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-            <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      </li>
-      <li class="flex-1"></li>
-      <%= if @current_scope do %>
-        <li>
-          {@current_scope.user.email}
-        </li>
-        <li>
-          <.link href={~p"/users/settings"}>Settings</.link>
-        </li>
-        <li>
-          <.link href={~p"/users/log-out"} method="delete">Log out</.link>
-        </li>
-      <% else %>
-        <li>
-          <.link href={~p"/users/register"}>Register</.link>
-        </li>
-        <li>
-          <.link href={~p"/users/log-in"}>Log in</.link>
-        </li>
+    <nav class="h-8 w-full relative z-10 flex items-center gap-2 px-3 sm:px-4 shrink-0 bg-gray-800 text-gray-200 text-xs">
+      <a href="/" class="flex items-center gap-1 hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+          <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
+        </svg>
+      </a>
+      <%= if assigns[:kata_section] do %>
+        <span class="text-gray-500">/</span>
+        <span class="font-semibold text-white">{assigns[:kata_section]} Katas</span>
       <% end %>
-    </ul>
-    <div class="flex-1 min-h-0">
+      <span class="flex-1"></span>
+      <%= if @current_scope do %>
+        <span class="text-gray-400">{@current_scope.user.email}</span>
+        <.link href={~p"/users/settings"} class="hover:text-white transition-colors">Settings</.link>
+        <.link href={~p"/users/log-out"} method="delete" class="hover:text-white transition-colors">Log out</.link>
+      <% else %>
+        <.link href={~p"/users/register"} class="hover:text-white transition-colors">Register</.link>
+        <.link href={~p"/users/log-in"} class="hover:text-white transition-colors">Log in</.link>
+      <% end %>
+    </nav>
+    <div class="flex-1 min-h-0 overflow-y-auto">
       {@inner_content}
     </div>
   </body>

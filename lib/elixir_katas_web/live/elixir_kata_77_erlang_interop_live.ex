@@ -10,7 +10,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
         %{
           label: ":math.pi",
           code: ":math.pi()",
-          note: "Returns the value of pi. Note the parentheses -- Erlang functions always need them."
+          note:
+            "Returns the value of pi. Note the parentheses -- Erlang functions always need them."
         },
         %{
           label: ":math.sqrt",
@@ -20,7 +21,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
         %{
           label: ":math.pow",
           code: ":math.pow(2, 10)",
-          note: "Power function. Returns a float (1024.0). Use trunc/1 or round/1 if you need an integer."
+          note:
+            "Power function. Returns a float (1024.0). Use trunc/1 or round/1 if you need an integer."
         },
         %{
           label: ":math.log",
@@ -37,7 +39,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
         %{
           label: ":timer.seconds",
           code: ":timer.seconds(5)",
-          note: "Converts 5 seconds to 5000 milliseconds. Useful for timeouts and Process.send_after."
+          note:
+            "Converts 5 seconds to 5000 milliseconds. Useful for timeouts and Process.send_after."
         },
         %{
           label: ":timer.minutes",
@@ -73,7 +76,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
         },
         %{
           label: ":crypto.mac",
-          code: ":crypto.mac(:hmac, :sha256, \"secret\", \"message\") |> Base.encode16(case: :lower)",
+          code:
+            ":crypto.mac(:hmac, :sha256, \"secret\", \"message\") |> Base.encode16(case: :lower)",
           note: "HMAC for message authentication. Verifies both integrity and authenticity."
         }
       ]
@@ -123,7 +127,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
         %{
           label: "binary_to_term",
           code: ":erlang.term_to_binary(%{a: 1}) |> :erlang.binary_to_term()",
-          note: "Serialize/deserialize any Erlang term to/from binary. Used by distributed Erlang."
+          note:
+            "Serialize/deserialize any Erlang term to/from binary. Used by distributed Erlang."
         }
       ]
     },
@@ -157,7 +162,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
     %{
       id: "lists",
       title: ":lists",
-      description: "Erlang's list operations. Most are available via Elixir's Enum, but some are unique.",
+      description:
+        "Erlang's list operations. Most are available via Elixir's Enum, but some are unique.",
       examples: [
         %{
           label: ":lists.flatten",
@@ -249,7 +255,11 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
   ]
 
   @system_info_keys [
-    %{key: "process_count", label: "Running Processes", description: "Current number of BEAM processes"},
+    %{
+      key: "process_count",
+      label: "Running Processes",
+      description: "Current number of BEAM processes"
+    },
     %{key: "atom_count", label: "Atom Count", description: "Number of atoms in the atom table"},
     %{key: "port_count", label: "Port Count", description: "Open ports (files, sockets, etc.)"},
     %{key: "schedulers", label: "Schedulers", description: "Number of scheduler threads"},
@@ -280,16 +290,16 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
         Erlang modules are accessed as atoms (e.g., <code class="font-mono bg-base-300 px-1 rounded">:math.sqrt(2)</code>).
         This gives you access to a vast ecosystem of battle-tested libraries.
       </p>
-
-      <!-- Section 1: Module Explorer -->
+      
+    <!-- Section 1: Module Explorer -->
       <div class="card bg-base-200 shadow-md mb-6">
         <div class="card-body p-4">
           <h3 class="card-title text-sm mb-3">Erlang Module Explorer</h3>
           <p class="text-xs opacity-60 mb-4">
             Select a module to explore its commonly-used functions in Elixir.
           </p>
-
-          <!-- Module Tabs -->
+          
+    <!-- Module Tabs -->
           <div class="flex flex-wrap gap-2 mb-4">
             <%= for mod <- erlang_modules() do %>
               <button
@@ -298,15 +308,15 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
                 phx-value-id={mod.id}
                 class={"btn btn-sm " <> if(@active_module == mod.id, do: "btn-primary", else: "btn-outline")}
               >
-                <%= mod.title %>
+                {mod.title}
               </button>
             <% end %>
           </div>
 
           <% active_mod = Enum.find(erlang_modules(), &(&1.id == @active_module)) %>
-          <p class="text-xs opacity-60 mb-4"><%= active_mod.description %></p>
-
-          <!-- Example Subtabs -->
+          <p class="text-xs opacity-60 mb-4">{active_mod.description}</p>
+          
+    <!-- Example Subtabs -->
           <div class="flex flex-wrap gap-2 mb-4">
             <%= for {example, idx} <- Enum.with_index(active_mod.examples) do %>
               <button
@@ -315,41 +325,48 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
                 phx-value-idx={idx}
                 class={"btn btn-xs " <> if(idx == @active_example_idx, do: "btn-accent", else: "btn-ghost")}
               >
-                <%= example.label %>
+                {example.label}
               </button>
             <% end %>
           </div>
 
           <% example = Enum.at(active_mod.examples, @active_example_idx) %>
           <div class="space-y-3">
-            <div class="bg-base-300 rounded-lg p-4 font-mono text-sm whitespace-pre-wrap"><%= example.code %></div>
-
-            <!-- Live evaluation -->
+            <div class="bg-base-300 rounded-lg p-4 font-mono text-sm whitespace-pre-wrap">
+              {example.code}
+            </div>
+            
+    <!-- Live evaluation -->
             <div class="bg-success/10 border border-success/30 rounded-lg p-3">
               <div class="text-xs font-bold opacity-60 mb-1">Result (evaluated live)</div>
-              <div class="font-mono text-sm text-success font-bold"><%= evaluate_example(example.code) %></div>
+              <div class="font-mono text-sm text-success font-bold">
+                {evaluate_example(example.code)}
+              </div>
             </div>
 
             <div class="bg-info/10 border border-info/30 rounded-lg p-3">
               <div class="text-xs font-bold opacity-60 mb-1">Note</div>
-              <div class="text-sm"><%= example.note %></div>
+              <div class="text-sm">{example.note}</div>
             </div>
           </div>
-
-          <!-- Calling convention callout -->
+          
+    <!-- Calling convention callout -->
           <div class="alert alert-info mt-4 text-xs">
             <div>
-              <strong>Calling Convention:</strong> Erlang modules are atoms in Elixir.
-              Write <code class="font-mono bg-base-100 px-1 rounded">:module.function(args)</code> --
+              <strong>Calling Convention:</strong>
+              Erlang modules are atoms in Elixir.
+              Write <code class="font-mono bg-base-100 px-1 rounded">:module.function(args)</code>
+              --
               the colon makes it an atom, the dot calls the function.
-              Example: <code class="font-mono bg-base-100 px-1 rounded">:math.pi()</code> calls the Erlang
-              <code class="font-mono bg-base-100 px-1 rounded">math:pi()</code> function.
+              Example: <code class="font-mono bg-base-100 px-1 rounded">:math.pi()</code>
+              calls the Erlang <code class="font-mono bg-base-100 px-1 rounded">math:pi()</code>
+              function.
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Section 2: Type Mapping -->
+      
+    <!-- Section 2: Type Mapping -->
       <div class="card bg-base-200 shadow-md mb-6">
         <div class="card-body p-4">
           <div class="flex items-center justify-between mb-3">
@@ -359,7 +376,7 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
               phx-target={@myself}
               class="btn btn-xs btn-ghost"
             >
-              <%= if @show_type_mapping, do: "Hide", else: "Show" %>
+              {if @show_type_mapping, do: "Hide", else: "Show"}
             </button>
           </div>
 
@@ -374,47 +391,62 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
                 <div class="bg-base-300 rounded-lg p-3">
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
                     <div>
-                      <div class="text-xs font-bold text-primary mb-1">Elixir: <%= mapping.elixir_type %></div>
-                      <div class="bg-base-100 rounded p-2 font-mono text-xs"><%= mapping.elixir_example %></div>
+                      <div class="text-xs font-bold text-primary mb-1">
+                        Elixir: {mapping.elixir_type}
+                      </div>
+                      <div class="bg-base-100 rounded p-2 font-mono text-xs">
+                        {mapping.elixir_example}
+                      </div>
                     </div>
                     <div>
-                      <div class="text-xs font-bold text-secondary mb-1">Erlang: <%= mapping.erlang_type %></div>
-                      <div class="bg-base-100 rounded p-2 font-mono text-xs"><%= mapping.erlang_example %></div>
+                      <div class="text-xs font-bold text-secondary mb-1">
+                        Erlang: {mapping.erlang_type}
+                      </div>
+                      <div class="bg-base-100 rounded p-2 font-mono text-xs">
+                        {mapping.erlang_example}
+                      </div>
                     </div>
                   </div>
 
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2">
                     <div class="text-xs">
                       <span class="opacity-60">To Erlang:</span>
-                      <code class="font-mono bg-base-100 px-1 rounded"><%= mapping.convert_to_erlang %></code>
+                      <code class="font-mono bg-base-100 px-1 rounded">
+                        {mapping.convert_to_erlang}
+                      </code>
                     </div>
                     <div class="text-xs">
                       <span class="opacity-60">To Elixir:</span>
-                      <code class="font-mono bg-base-100 px-1 rounded"><%= mapping.convert_to_elixir %></code>
+                      <code class="font-mono bg-base-100 px-1 rounded">
+                        {mapping.convert_to_elixir}
+                      </code>
                     </div>
                   </div>
 
-                  <div class="text-xs opacity-70"><%= mapping.note %></div>
+                  <div class="text-xs opacity-70">{mapping.note}</div>
                 </div>
               <% end %>
             </div>
-
-            <!-- String vs Charlist demo -->
+            
+    <!-- String vs Charlist demo -->
             <div class="alert alert-warning mt-4 text-xs">
               <div>
                 <strong>Key difference:</strong>
-                <code class="font-mono bg-base-100 px-1 rounded">"hello"</code> is a binary (Elixir string).
-                <code class="font-mono bg-base-100 px-1 rounded">'hello'</code> is a charlist (Erlang string).
+                <code class="font-mono bg-base-100 px-1 rounded">"hello"</code>
+                is a binary (Elixir string).
+                <code class="font-mono bg-base-100 px-1 rounded">'hello'</code>
+                is a charlist (Erlang string).
                 They look similar in IEx but are completely different types!
-                Use <code class="font-mono bg-base-100 px-1 rounded">String.to_charlist/1</code> and
-                <code class="font-mono bg-base-100 px-1 rounded">List.to_string/1</code> to convert.
+                Use <code class="font-mono bg-base-100 px-1 rounded">String.to_charlist/1</code>
+                and <code class="font-mono bg-base-100 px-1 rounded">List.to_string/1</code>
+                to convert.
               </div>
             </div>
           <% end %>
         </div>
       </div>
-
-      <!-- Section 3: System Info -->
+      
+    <!-- Section 3: System Info -->
       <div class="card bg-base-200 shadow-md mb-6">
         <div class="card-body p-4">
           <div class="flex items-center justify-between mb-3">
@@ -424,11 +456,12 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
               phx-target={@myself}
               class="btn btn-sm btn-primary"
             >
-              <%= if @system_info_data, do: "Refresh", else: "Load System Info" %>
+              {if @system_info_data, do: "Refresh", else: "Load System Info"}
             </button>
           </div>
           <p class="text-xs opacity-60 mb-4">
-            The <code class="font-mono bg-base-300 px-1 rounded">:erlang</code> module exposes live BEAM runtime information.
+            The <code class="font-mono bg-base-300 px-1 rounded">:erlang</code>
+            module exposes live BEAM runtime information.
             Click the button to query your running system.
           </p>
 
@@ -436,21 +469,21 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
               <%= for info <- @system_info_data do %>
                 <div class="bg-base-300 rounded-lg p-3">
-                  <div class="text-xs opacity-60"><%= info.description %></div>
-                  <div class="font-bold text-lg"><%= info.value %></div>
-                  <div class="font-mono text-xs text-primary mt-1"><%= info.label %></div>
+                  <div class="text-xs opacity-60">{info.description}</div>
+                  <div class="font-bold text-lg">{info.value}</div>
+                  <div class="font-mono text-xs text-primary mt-1">{info.label}</div>
                 </div>
               <% end %>
             </div>
-
-            <!-- Memory breakdown -->
+            
+    <!-- Memory breakdown -->
             <div class="bg-base-300 rounded-lg p-4">
               <div class="text-xs font-bold opacity-60 mb-3">Memory Breakdown</div>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <%= for {mem_key, mem_val} <- @memory_data do %>
                   <div class="text-center">
-                    <div class="font-bold text-sm"><%= format_bytes(mem_val) %></div>
-                    <div class="text-xs opacity-60"><%= mem_key %></div>
+                    <div class="font-bold text-sm">{format_bytes(mem_val)}</div>
+                    <div class="text-xs opacity-60">{mem_key}</div>
                   </div>
                 <% end %>
               </div>
@@ -458,7 +491,7 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
 
             <div class="bg-base-300 rounded-lg p-4 mt-3">
               <div class="text-xs font-bold opacity-60 mb-2">Code used to fetch this data</div>
-              <div class="font-mono text-xs whitespace-pre-wrap"><%= system_info_code() %></div>
+              <div class="font-mono text-xs whitespace-pre-wrap">{system_info_code()}</div>
             </div>
           <% else %>
             <div class="text-center py-6 opacity-40 text-sm">
@@ -467,8 +500,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
           <% end %>
         </div>
       </div>
-
-      <!-- Section 4: Try Erlang Functions -->
+      
+    <!-- Section 4: Try Erlang Functions -->
       <div class="card bg-base-200 shadow-md mb-6">
         <div class="card-body p-4">
           <h3 class="card-title text-sm mb-2">Try Erlang Functions</h3>
@@ -486,8 +519,8 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
               <span class="text-xs opacity-50 self-center">Call any Erlang module from Elixir</span>
             </div>
           </form>
-
-          <!-- Quick examples -->
+          
+    <!-- Quick examples -->
           <div class="flex flex-wrap gap-2 mt-3 mb-3">
             <span class="text-xs opacity-50 self-center">Examples:</span>
             <%= for {label, code} <- quick_examples() do %>
@@ -497,7 +530,7 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
                 phx-value-code={code}
                 class="btn btn-xs btn-outline"
               >
-                <%= label %>
+                {label}
               </button>
             <% end %>
           </div>
@@ -505,38 +538,59 @@ defmodule ElixirKatasWeb.ElixirKata77ErlangInteropLive do
           <%= if @custom_result do %>
             <div class={"alert text-sm mt-3 " <> if(@custom_result.ok, do: "alert-success", else: "alert-error")}>
               <div>
-                <div class="font-mono text-xs opacity-60"><%= @custom_result.input %></div>
-                <div class="font-mono font-bold mt-1"><%= @custom_result.output %></div>
+                <div class="font-mono text-xs opacity-60">{@custom_result.input}</div>
+                <div class="font-mono font-bold mt-1">{@custom_result.output}</div>
               </div>
             </div>
           <% end %>
         </div>
       </div>
-
-      <!-- Section 5: Key Concepts -->
+      
+    <!-- Section 5: Key Concepts -->
       <div class="card bg-base-200 shadow-md">
         <div class="card-body p-4">
           <h3 class="card-title text-sm mb-3">Key Concepts</h3>
           <div class="space-y-3 text-sm">
             <div class="flex items-start gap-3 p-2 bg-base-300 rounded-lg">
               <span class="badge badge-primary badge-sm mt-0.5">1</span>
-              <span><strong>Erlang modules are atoms</strong> &mdash; call them with <code class="font-mono bg-base-100 px-1 rounded">:module.function(args)</code>. No wrappers or adapters needed.</span>
+              <span>
+                <strong>Erlang modules are atoms</strong>
+                &mdash; call them with <code class="font-mono bg-base-100 px-1 rounded">:module.function(args)</code>. No wrappers or adapters needed.
+              </span>
             </div>
             <div class="flex items-start gap-3 p-2 bg-base-300 rounded-lg">
               <span class="badge badge-primary badge-sm mt-0.5">2</span>
-              <span><strong>Strings vs charlists</strong> &mdash; Elixir uses binaries (<code class="font-mono bg-base-100 px-1 rounded">"hello"</code>), Erlang uses charlists (<code class="font-mono bg-base-100 px-1 rounded">'hello'</code>). Convert with <code class="font-mono bg-base-100 px-1 rounded">String.to_charlist/1</code> and <code class="font-mono bg-base-100 px-1 rounded">List.to_string/1</code>.</span>
+              <span>
+                <strong>Strings vs charlists</strong>
+                &mdash; Elixir uses binaries (<code class="font-mono bg-base-100 px-1 rounded">"hello"</code>), Erlang uses charlists (<code class="font-mono bg-base-100 px-1 rounded">'hello'</code>). Convert with
+                <code class="font-mono bg-base-100 px-1 rounded">String.to_charlist/1</code>
+                and <code class="font-mono bg-base-100 px-1 rounded">List.to_string/1</code>.
+              </span>
             </div>
             <div class="flex items-start gap-3 p-2 bg-base-300 rounded-lg">
               <span class="badge badge-primary badge-sm mt-0.5">3</span>
-              <span><strong>Zero-cost interop</strong> &mdash; calling Erlang from Elixir has no performance overhead. They compile to the same BEAM bytecode.</span>
+              <span>
+                <strong>Zero-cost interop</strong>
+                &mdash; calling Erlang from Elixir has no performance overhead. They compile to the same BEAM bytecode.
+              </span>
             </div>
             <div class="flex items-start gap-3 p-2 bg-base-300 rounded-lg">
               <span class="badge badge-primary badge-sm mt-0.5">4</span>
-              <span><strong>Prefer Elixir wrappers</strong> &mdash; many Erlang functions have Elixir equivalents (e.g., <code class="font-mono bg-base-100 px-1 rounded">Enum</code> over <code class="font-mono bg-base-100 px-1 rounded">:lists</code>). Use Erlang directly only when no Elixir alternative exists.</span>
+              <span>
+                <strong>Prefer Elixir wrappers</strong>
+                &mdash; many Erlang functions have Elixir equivalents (e.g.,
+                <code class="font-mono bg-base-100 px-1 rounded">Enum</code>
+                over <code class="font-mono bg-base-100 px-1 rounded">:lists</code>). Use Erlang directly only when no Elixir alternative exists.
+              </span>
             </div>
             <div class="flex items-start gap-3 p-2 bg-base-300 rounded-lg">
               <span class="badge badge-primary badge-sm mt-0.5">5</span>
-              <span><strong>The BEAM is your toolkit</strong> &mdash; <code class="font-mono bg-base-100 px-1 rounded">:crypto</code>, <code class="font-mono bg-base-100 px-1 rounded">:timer</code>, <code class="font-mono bg-base-100 px-1 rounded">:ets</code>, <code class="font-mono bg-base-100 px-1 rounded">:erlang</code> give you crypto, timing, storage, and system introspection without any dependencies.</span>
+              <span>
+                <strong>The BEAM is your toolkit</strong>
+                &mdash; <code class="font-mono bg-base-100 px-1 rounded">:crypto</code>, <code class="font-mono bg-base-100 px-1 rounded">:timer</code>, <code class="font-mono bg-base-100 px-1 rounded">:ets</code>,
+                <code class="font-mono bg-base-100 px-1 rounded">:erlang</code>
+                give you crypto, timing, storage, and system introspection without any dependencies.
+              </span>
             </div>
           </div>
         </div>

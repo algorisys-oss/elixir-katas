@@ -122,15 +122,22 @@ defmodule ElixirKatasWeb.KataComponents do
   attr :path, :string, required: true
   attr :tags, :list, default: []
   attr :tag_color_fn, :any, default: &ElixirKatasWeb.LiveviewKataData.tag_color/1
+  attr :disabled, :boolean, default: false
 
   def kata_card(assigns) do
     ~H"""
-    <div class="card bg-white dark:bg-gray-800 shadow-md hover:shadow-lg transition-shadow border border-gray-200 dark:border-gray-700 p-6 rounded-lg group relative">
-      <.link navigate={@path} class="absolute inset-0 z-0"><span class="sr-only">{@title}</span></.link>
+    <div class={["card bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-lg relative",
+      if(@disabled, do: "opacity-50 cursor-not-allowed", else: "shadow-md hover:shadow-lg transition-shadow group")]}>
+      <%= unless @disabled do %>
+        <.link navigate={@path} class="absolute inset-0 z-0"><span class="sr-only">{@title}</span></.link>
+      <% end %>
       <div class="relative z-10 pointer-events-none">
         <div class="flex items-center mb-4">
-          <span class="w-3 h-3 rounded-full bg-indigo-600 mr-3"></span>
-          <h2 class="text-xl font-semibold group-hover:text-primary transition-colors">{@title}</h2>
+          <span class={["w-3 h-3 rounded-full mr-3", if(@disabled, do: "bg-gray-400", else: "bg-indigo-600")]}></span>
+          <h2 class={["text-xl font-semibold", if(@disabled, do: "text-gray-400 dark:text-gray-500", else: "group-hover:text-primary transition-colors")]}>{@title}</h2>
+          <%= if @disabled do %>
+            <span class="ml-2 px-2 py-0.5 text-xs font-medium rounded-full bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400">Coming soon</span>
+          <% end %>
         </div>
         <p class="text-gray-600 dark:text-gray-400">
           {@description}

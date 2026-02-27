@@ -26,12 +26,30 @@ defmodule ElixirKatasWeb.Router do
     
     live "/usecases", UseCasesIndexLive
     
-    live_session :elixir_katas, layout: {ElixirKatasWeb.Layouts, :elixir_app} do
+    live_session :elixir_katas,
+      layout: {ElixirKatasWeb.Layouts, :elixir_app},
+      on_mount: [{ElixirKatasWeb.Hooks.KataSection, "Elixir"}] do
       live "/elixir-katas", ElixirKatasIndexLive
       live "/elixir-katas/:slug", ElixirKataHostLive, :index
     end
 
-    live_session :default, layout: {ElixirKatasWeb.Layouts, :app} do
+    live_session :phoenix_katas,
+      layout: {ElixirKatasWeb.Layouts, :phoenix_app},
+      on_mount: [{ElixirKatasWeb.Hooks.KataSection, "Phoenix"}] do
+      live "/phoenix-katas", PhoenixKatasIndexLive
+      live "/phoenix-katas/:slug", PhoenixKataHostLive, :index
+    end
+
+    live_session :phoenix_api_katas,
+      layout: {ElixirKatasWeb.Layouts, :phoenix_api_app},
+      on_mount: [{ElixirKatasWeb.Hooks.KataSection, "Phoenix API"}] do
+      live "/phoenix-api-katas", PhoenixApiKatasIndexLive
+      live "/phoenix-api-katas/:slug", PhoenixApiKataHostLive, :index
+    end
+
+    live_session :default,
+      layout: {ElixirKatasWeb.Layouts, :app},
+      on_mount: [{ElixirKatasWeb.Hooks.KataSection, "LiveView"}] do
       live "/liveview-katas", KatasIndexLive
       # Specific routes for katas with extra path segments
       live "/liveview-katas/42-path-params/:id", KataHostLive, :kata_42
