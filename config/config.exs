@@ -70,6 +70,9 @@ config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Use Chrome headless for PDF generation (instead of wkhtmltopdf)
+config :pdf_generator, generator: PdfGenerator.Generator.ChromeHeadless
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 

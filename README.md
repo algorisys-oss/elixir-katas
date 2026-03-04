@@ -25,17 +25,17 @@ brew install imagemagick
 sudo dnf install ImageMagick
 ```
 
-#### wkhtmltopdf (for Kata 98 - PDF Generation)
+#### Chrome/Chromium (for Kata 98 - PDF Generation)
 
 ```bash
 # Ubuntu/Debian
-sudo apt-get install wkhtmltopdf
+sudo apt-get install chromium-browser
 
 # macOS
-brew install wkhtmltopdf
+brew install --cask chromium
 
 # Fedora
-sudo dnf install wkhtmltopdf
+sudo dnf install chromium
 ```
 
 #### SQLite3 (database)
