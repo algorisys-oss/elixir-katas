@@ -70,8 +70,12 @@ config :logger, :default_formatter,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Use Chrome headless for PDF generation (instead of wkhtmltopdf)
-config :pdf_generator, generator: PdfGenerator.Generator.ChromeHeadless
+# Use Chrome headless for PDF generation (instead of wkhtmltopdf).
+# raise_on_missing_wkhtmltopdf_binary: false prevents PathAgent from
+# crashing app startup when wkhtmltopdf isn't installed (e.g. on macOS).
+config :pdf_generator,
+  generator: PdfGenerator.Generator.ChromeHeadless,
+  raise_on_missing_wkhtmltopdf_binary: false
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
